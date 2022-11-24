@@ -1,6 +1,16 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Registrar = () => {
+    //nombre
+    const [nombre, setNombre] = useState('');
+    //email
+    const [email, setEmail] = useState('');
+    //password
+    const [password, setPassword] = useState('');
+    //repetir password
+    const [repetirPassword, setRepetirPassword] = useState('');
+
     return (
       <>
         <div>
@@ -22,6 +32,8 @@ const Registrar = () => {
                         type="text"
                         placeholder="Tu nombre"
                         className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                        value={nombre}
+                        onChange={ e => setNombre(e.target.value) }
                     />
                 </div>
                 
@@ -35,6 +47,8 @@ const Registrar = () => {
                         type="email"
                         placeholder="Email de registro"
                         className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                        value={email}
+                        onChange={ e => setEmail(e.target.value) }
                     />
                 </div>
                 
@@ -48,6 +62,8 @@ const Registrar = () => {
                         type="password"
                         placeholder="Tu contraseña"
                         className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                        value={password}
+                        onChange={ e => setPassword(e.target.value) }
                     />
                 </div>
                 
@@ -61,6 +77,8 @@ const Registrar = () => {
                         type="password"
                         placeholder="Repite tu contraseña"
                         className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                        value={repetirPassword}
+                        onChange={ e => setRepetirPassword(e.target.value) }
                     />
                 </div>
 
