@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Alerta from '../components/Alerta';
 
 const Registrar = () => {
     //nombre
@@ -10,6 +11,8 @@ const Registrar = () => {
     const [password, setPassword] = useState('');
     //repetir password
     const [repetirPassword, setRepetirPassword] = useState('');
+    //ALERTA
+    const [alerta, setAlerta] = useState({});
 
     //funcion para el formulario
     const handleSubmit = e => {
@@ -17,20 +20,26 @@ const Registrar = () => {
 
         //validar que ningun campo este vacio
         if ([nombre, email, password, repetirPassword].includes('') ) {
-            console.log("HAY CAMPOS VACIOS");
+            setAlerta({msg:'Hay campos vacios', error: true});
             return;
         }
         //validar que los password sean iguales
         if (password !== repetirPassword)  {
-            console.log("LOS PASSWORDS NO SON IGUALES");
+            setAlerta({msg:'Las contraseñas no son iguales', error: true});
             return;
         }
         //validar que el password tenga un minimo de 6 caracteres
         if (password.length < 6) {
-            console.log("EL PASSWORD ES MUY CORTO");
+            setAlerta({msg:'La contraseña es muy corta, debe tener minimo 6 caracteres', error: true});
+            return;
         }
 
+        //si todo esta bien lo regresamos a un objeto vacio
+        setAlerta({});
+
     }
+    //para verificar si hay un mensaje de alerta previo
+    const { msg } = alerta;
 
     return (
       <>
@@ -42,6 +51,11 @@ const Registrar = () => {
         </div>
 
         <div className='mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white'>
+            
+            { msg && <Alerta 
+                alerta={alerta}
+            />}
+
             <form
                 onSubmit={handleSubmit}
             >
