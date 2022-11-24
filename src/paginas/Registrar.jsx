@@ -11,6 +11,27 @@ const Registrar = () => {
     //repetir password
     const [repetirPassword, setRepetirPassword] = useState('');
 
+    //funcion para el formulario
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        //validar que ningun campo este vacio
+        if ([nombre, email, password, repetirPassword].includes('') ) {
+            console.log("HAY CAMPOS VACIOS");
+            return;
+        }
+        //validar que los password sean iguales
+        if (password !== repetirPassword)  {
+            console.log("LOS PASSWORDS NO SON IGUALES");
+            return;
+        }
+        //validar que el password tenga un minimo de 6 caracteres
+        if (password.length < 6) {
+            console.log("EL PASSWORD ES MUY CORTO");
+        }
+
+    }
+
     return (
       <>
         <div>
@@ -21,7 +42,9 @@ const Registrar = () => {
         </div>
 
         <div className='mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white'>
-            <form>
+            <form
+                onSubmit={handleSubmit}
+            >
                 <div className="my-5">
                     <label
                         className="uppercase text-gray-600 block text-xl font-bold"
