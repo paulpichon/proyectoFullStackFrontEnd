@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Alerta from '../components/Alerta';
 
 const Registrar = () => {
@@ -15,7 +16,7 @@ const Registrar = () => {
     const [alerta, setAlerta] = useState({});
 
     //funcion para el formulario
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
 
         //validar que ningun campo este vacio
@@ -36,6 +37,24 @@ const Registrar = () => {
 
         //si todo esta bien lo regresamos a un objeto vacio
         setAlerta({});
+
+        //crear el usuaerio en la API
+        try {
+            const url = "http://localhost:4000/api/veterinarios"
+            await axios.post(url, {nombre, email, password});
+
+            setAlerta({
+                msg: 'Creado correctamente, revisa tu correo electronico',
+                error: false
+            });
+            
+        } catch (error) {
+            //error usuario ya esta repetido
+            setAlerta({
+                msg: error.response.data.msg,
+                error: true
+            })
+        }
 
     }
     //para verificar si hay un mensaje de alerta previo
