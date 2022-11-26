@@ -1,6 +1,7 @@
 import { useState } from 'react';
 //importar componente para detener el pqueño spiner al ir a otro navegador
-import { Link } from 'react-router-dom';
+//useNavigate para redireccionar al usuario
+import { Link, useNavigate } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import useAuth from '../hooks/useAuth';
 import clienteAxios from '../config/axios';
@@ -10,6 +11,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [alerta, setAlerta] = useState({});
+
+    const navigate = useNavigate();
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -31,6 +34,9 @@ const Login = () => {
             });
             //local storage
             localStorage.setItem('token', data.token);
+
+            //redireccionar al usuario
+            navigate('/admin');
 
         } catch (error) {
             setAlerta({
