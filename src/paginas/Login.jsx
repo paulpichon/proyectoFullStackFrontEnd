@@ -1,7 +1,9 @@
 //importar componente para detener el pqueño spiner al ir a otro navegador
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
+
   return (
     <>
         <div>
