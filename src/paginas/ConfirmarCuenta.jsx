@@ -17,7 +17,7 @@ const ConfirmarCuenta = () => {
   useEffect(() => {
     const confirmarCuenta = async () => {
       try {
-        const url = `http://localhost:4000/api/veterinarios/confirmar/${id}`;
+        const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinarios/confirmar/${id}`;
         //se puede poner axios.get(), pero por defecto axios ya tiene el get() impliciro
         const { data } = await axios(url);
 
