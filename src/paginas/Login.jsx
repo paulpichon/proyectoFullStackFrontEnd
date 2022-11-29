@@ -20,7 +20,7 @@ const Login = () => {
         if ([email, password].includes('')) {
             
             setAlerta({
-                msg: 'Todos los cmapos son obligatorios',
+                msg: 'Todos los campos son obligatorios',
                 error: true
             });
 
