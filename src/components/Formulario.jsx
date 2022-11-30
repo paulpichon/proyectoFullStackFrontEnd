@@ -9,11 +9,11 @@ const Formulario = () => {
     //propietario
     const [propietario, setPropietario] = useState('');
     const [email, setEmail] = useState('');
-    const [fecha, setFecha] = useState(Date.now());
+    const [fecha, setFecha] = useState('');
     const [sintomas, setSintomas] = useState('');
 
     const [alerta, setAlerta] = useState({});
-    const {  } = usePacientes();
+    const { guardarPaciente } = usePacientes();
     
     //submit
     const handleSubmit = e => {
@@ -28,6 +28,8 @@ const Formulario = () => {
             return;
         }
 
+        setAlerta({});
+        guardarPaciente({ nombre, propietario, email, fecha, sintomas });
 
     }
 
