@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import Alerta from './Alerta';
 
 
 const Formulario = () => {
@@ -12,7 +13,24 @@ const Formulario = () => {
 
     const [alerta, setAlerta] = useState({});
 
+    //submit
+    const handleSubmit = e => {
+        e.preventDefault();
 
+        //validar el formulario
+        if ([nombre, propietario, email, fecha, sintomas].includes('')) {
+            setAlerta({
+                msg: 'Todos los campos son obligatorios',
+                error: true
+            });
+            return;
+        }
+
+
+    }
+
+    const { msg } = alerta;    
+ 
   return (
     <>
         <p className="text-lg text-center mb-10">
@@ -21,7 +39,8 @@ const Formulario = () => {
         </p>
 
         <form
-            className="bg-white py-10 px-5 mb-10 lg:mb-0 shadow-md rounded-md"
+            className="bg-white py-10 px-5 mb-10 lg:mb-5 shadow-md rounded-md"
+            onSubmit={handleSubmit}
         >
             <div className="mb-5">
                 <label 
@@ -104,7 +123,9 @@ const Formulario = () => {
             />
 
         </form>
-    
+
+        {msg && <Alerta alerta={alerta}/> }
+
     </>
 
 
