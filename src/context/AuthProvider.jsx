@@ -5,6 +5,8 @@ const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
 
+    //para verificar is tienen sesion en RUTA PROTEGIDA
+    const [cargando, sertCargando] = useState(true);
     const [auth, setAuth] = useState({});
 
     useEffect(() => {
@@ -13,7 +15,10 @@ const AuthProvider = ({children}) => {
             const token = localStorage.getItem('token');
 
             //si no hay un TOKEN
-            if (!token) return;
+            if (!token) {
+                sertCargando(false);
+                return;
+            }
 
             const config = {
                 headers: {
@@ -33,6 +38,7 @@ const AuthProvider = ({children}) => {
                 setAuth({});
             }
 
+            sertCargando(false);
 
 
         }
@@ -44,7 +50,8 @@ const AuthProvider = ({children}) => {
         <AuthContext.Provider
             value={{
                 auth,
-                setAuth
+                setAuth,
+                cargando
             }}
         >
             {children}
