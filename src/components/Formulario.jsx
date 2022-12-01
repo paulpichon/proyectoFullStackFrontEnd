@@ -40,8 +40,18 @@ const Formulario = () => {
             return;
         }
 
-        setAlerta({});
         guardarPaciente({ nombre, propietario, email, fecha, sintomas, id });
+        setAlerta({
+            msg: 'Guardado correctamente'
+        });
+        //reiniciar valores
+        setNombre('');
+        setPropietario('');
+        setEmail('');
+        setFecha('');
+        setSintomas('');
+        setId('');
+
 
     }
 
